@@ -1,0 +1,30 @@
+name: Windows-12hr-RDP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 720
+
+    steps:
+    - name: Enable RDP
+      run: |
+        net user runneradmin Password123! /add
+        net localgroup administrators runneradmin /add
+        net start termservice
+
+    - name: Download ngrok
+      run: |
+        Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+        Expand-Archive ngrok.zip
+
+    - name: Connect ngrok
+      run: |
+        .\ngrok.exe authtoken 39kYnDLPEZS2bMaQ4rUBXAC04eT_6qVcSGzy85cx5S2gPetxo
+        .\ngrok.exe tcp 3389
+
+    - name: Keep RDP Alive
+      run: |
+        while ($true) { Start-Sleep -Seconds 300 }
