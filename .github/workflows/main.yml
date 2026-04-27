@@ -22,7 +22,7 @@ jobs:
 
     - name: Connect ngrok
       run: |
-        .\ngrok.exe authtoken 39kYnDLPEZS2bMaQ4rUBXAC04eT_6qVcSGzy85cx5S2gPetxo
+        .\ngrok.exe authtoken 3Cw3amNsXT7pGWWvx7N73GrgJvF_3qkMpruRKGkKE53FitLqo
         .\ngrok.exe tcp 3389
 
     - name: Keep RDP Alive
